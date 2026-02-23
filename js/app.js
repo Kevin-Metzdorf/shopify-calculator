@@ -138,7 +138,7 @@ document.getElementById('btn-download-pdf').addEventListener('click', () => {
     const qty    = qtyEl && !qtyEl.disabled ? Number(qtyEl.value) : 1;
 
     const li = document.createElement('li');
-    li.className = 'text-sm text-polaris-text';
+    li.style.color = '#202223';
     li.textContent = qty > 1 ? `${name} (× ${qty})` : name;
     list.appendChild(li);
   });
@@ -148,7 +148,7 @@ document.getElementById('btn-download-pdf').addEventListener('click', () => {
     margin:     0,
     filename:   `Estimate_${clientName.replace(/\s+/g, '_')}.pdf`,
     image:      { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
+    html2canvas: { scale: 2, windowWidth: 794 },
     jsPDF:      { unit: 'mm', format: 'a4', orientation: 'portrait' },
   };
 
