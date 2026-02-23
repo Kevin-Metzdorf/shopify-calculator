@@ -12,6 +12,9 @@ const hiddenSectionsFor = {
 
 const form        = document.getElementById('estimator-form');
 const allSections = ['section-design', 'section-data', 'section-dev', 'section-apps', 'section-commerce', 'section-content'];
+const fmtEur      = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format.bind(
+  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
+);
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 function buildState() {
@@ -46,7 +49,6 @@ function buildState() {
 
 function updateSidebar(result, vatRate) {
   const fmt    = n => Number.isInteger(n) ? n : +n.toFixed(2);
-  const fmtEur = n => new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(n);
 
   const vatPct = Math.round(vatRate * 100);
 
@@ -98,9 +100,16 @@ document.getElementById('risk-buffer').addEventListener('input', e => {
   document.getElementById('risk-buffer-value').textContent = `${e.target.value}%`;
 });
 
-// ── Main listeners ─────────────────────────────────────────────────────────
-form.addEventListener('input',  run);
-form.addEventListener('change', run);
+// ── Main listeners — rAF debounce coalesces rapid input/change events ──────
+let rafPending = false;
+function scheduleRun() {
+  if (rafPending) return;
+  rafPending = true;
+  requestAnimationFrame(() => { rafPending = false; run(); });
+}
+
+form.addEventListener('input',  scheduleRun);
+form.addEventListener('change', scheduleRun);
 
 // ── Boot — module scripts run after DOM is ready, call run() directly ──────
 run();
