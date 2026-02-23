@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kevin Metzdorf Ltd. – Shopify Project Estimator</title>
   <link rel="stylesheet" href="./css/output.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body class="min-h-screen">
 
@@ -28,23 +26,6 @@
 
     <!-- ── LEFT: Form ─────────────────────────────────────────────── -->
     <form id="estimator-form" class="flex-1 min-w-0">
-
-      <!-- Client Info -->
-      <div class="card">
-        <p class="card-title">Client Info</p>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label for="client-name" class="block text-xs font-medium text-polaris-subdued mb-1.5">Client / Company Name</label>
-            <input type="text" id="client-name" name="clientName" placeholder="Acme GmbH"
-              class="select-input" />
-          </div>
-          <div>
-            <label for="project-name" class="block text-xs font-medium text-polaris-subdued mb-1.5">Project Name</label>
-            <input type="text" id="project-name" name="projectName" placeholder="Shopify Relaunch 2025"
-              class="select-input" />
-          </div>
-        </div>
-      </div>
 
       <!-- Global Settings -->
       <div class="card">
@@ -287,11 +268,6 @@
           <p class="text-xs text-polaris-subdued mt-1">EUR · incl. applicable tax</p>
         </div>
       </div>
-
-      <button id="btn-download-pdf" type="button"
-        class="bg-polaris-interactive text-white font-semibold py-3 px-4 rounded-lg w-full mt-4 hover:bg-blue-700 transition cursor-pointer">
-        Download PDF Estimate
-      </button>
 
       <p class="text-xs text-polaris-subdued text-center mt-2">
         All estimates are indicative · Kevin Metzdorf Ltd.
