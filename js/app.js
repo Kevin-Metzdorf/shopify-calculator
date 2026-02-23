@@ -144,9 +144,6 @@ document.getElementById('btn-download-pdf').addEventListener('click', () => {
   });
 
   // Generate PDF
-  const template = document.getElementById('pdf-template');
-  template.classList.remove('hidden');
-
   const opt = {
     margin:     0,
     filename:   `Estimate_${clientName.replace(/\s+/g, '_')}.pdf`,
@@ -155,9 +152,7 @@ document.getElementById('btn-download-pdf').addEventListener('click', () => {
     jsPDF:      { unit: 'mm', format: 'a4', orientation: 'portrait' },
   };
 
-  html2pdf().set(opt).from(template).save().then(() => {
-    template.classList.add('hidden');
-  });
+  html2pdf().set(opt).from(document.getElementById('pdf-template')).save();
 });
 
 
