@@ -1,0 +1,16 @@
+{
+  "name": "shopify-calculator",
+  "version": "1.0.0",
+  "description": "Shopify Project Estimator – Kevin Metzdorf Ltd.",
+  "scripts": {
+    "build": "tailwindcss -i ./css/input.css -o ./css/output.css --minify",
+    "watch": "tailwindcss -i ./css/input.css -o ./css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.0",
+    "tailwindcss": "^4.2.0"
+  }
+}

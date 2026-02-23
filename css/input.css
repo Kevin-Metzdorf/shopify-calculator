@@ -1,0 +1,108 @@
+@import "tailwindcss";
+@source "../index.html";
+@source "../js/*.js";
+
+@theme {
+  --color-polaris-bg:          #f6f6f7;
+  --color-polaris-surface:     #ffffff;
+  --color-polaris-border:      #e1e3e5;
+  --color-polaris-text:        #202223;
+  --color-polaris-subdued:     #6d7175;
+  --color-polaris-interactive: #2c6ecb;
+  --color-polaris-green:       #008060;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-polaris-bg);
+    color: var(--color-polaris-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--color-polaris-surface);
+    border: 1px solid var(--color-polaris-border);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  .card-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-polaris-subdued);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+  .field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-polaris-border);
+  }
+  .field-row:last-child {
+    border-bottom: none;
+  }
+  .field-label {
+    font-size: 0.875rem;
+    color: var(--color-polaris-text);
+  }
+  .qty-input {
+    width: 4rem;
+    text-align: center;
+    font-size: 0.875rem;
+    border: 1px solid var(--color-polaris-border);
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .qty-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-polaris-interactive);
+  }
+  .select-input {
+    width: 100%;
+    font-size: 0.875rem;
+    border: 1px solid var(--color-polaris-border);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: white;
+  }
+  .select-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-polaris-interactive);
+  }
+  .stat-block {
+    margin-bottom: 1rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-polaris-subdued);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+  .stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-polaris-text);
+  }
+  .stat-value-lg {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--color-polaris-green);
+  }
+}
+
+@layer utilities {
+  input[type="number"]::-webkit-inner-spin-button {
+    opacity: 1;
+  }
+}

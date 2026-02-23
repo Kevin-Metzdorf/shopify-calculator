@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kevin Metzdorf Ltd. – Shopify Project Estimator</title>
+  <link rel="stylesheet" href="./css/output.css" />
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-polaris-surface border-b border-polaris-border px-8 py-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
+    <div class="flex items-center gap-3">
+      <svg class="w-7 h-7 text-polaris-green" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M15.5 2.1l-1-.3a.4.4 0 0 0-.5.3l-.2.8a5.5 5.5 0 0 0-3.3.1l-.2-.8a.4.4 0 0 0-.5-.3l-1 .3a.4.4 0 0 0-.3.5l.2.8A5.5 5.5 0 0 0 6.5 6l-.8-.2a.4.4 0 0 0-.5.3l-.3 1a.4.4 0 0 0 .3.5l.8.2a5.5 5.5 0 0 0 0 3.4l-.8.2a.4.4 0 0 0-.3.5l.3 1a.4.4 0 0 0 .5.3l.8-.2a5.5 5.5 0 0 0 2.2 2.2l-.2.8a.4.4 0 0 0 .3.5l1 .3a.4.4 0 0 0 .5-.3l.2-.8a5.5 5.5 0 0 0 3.3 0l.2.8a.4.4 0 0 0 .5.3l1-.3a.4.4 0 0 0 .3-.5l-.2-.8a5.5 5.5 0 0 0 2.2-2.2l.8.2a.4.4 0 0 0 .5-.3l.3-1a.4.4 0 0 0-.3-.5l-.8-.2a5.5 5.5 0 0 0 0-3.4l.8-.2a.4.4 0 0 0 .3-.5l-.3-1a.4.4 0 0 0-.5-.3l-.8.2A5.5 5.5 0 0 0 15.7 3.4l.2-.8a.4.4 0 0 0-.4-.5zM12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+      </svg>
+      <div>
+        <h1 class="text-base font-bold text-polaris-text leading-tight">Kevin Metzdorf Ltd.</h1>
+        <p class="text-xs text-polaris-subdued">Shopify Project Estimator</p>
+      </div>
+    </div>
+    <span class="text-xs font-medium bg-polaris-bg text-polaris-subdued px-3 py-1 rounded-full border border-polaris-border">Internal Tool</span>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-8 flex gap-8 items-start">
+
+    <!-- ── LEFT: Form ─────────────────────────────────────────────── -->
+    <form id="estimator-form" class="flex-1 min-w-0">
+
+      <!-- Global Settings -->
+      <div class="card">
+        <p class="card-title">Global Settings</p>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="hourly-rate" class="block text-xs font-medium text-polaris-subdued mb-1.5">Hourly Rate (EUR)</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-polaris-subdued text-sm pointer-events-none">€</span>
+              <input type="number" id="hourly-rate" name="hourlyRate" min="1" value="75"
+                class="select-input pl-7" />
+            </div>
+          </div>
+          <div>
+            <label for="vat-rate" class="block text-xs font-medium text-polaris-subdued mb-1.5">Tax / VAT</label>
+            <select id="vat-rate" name="vatRate" class="select-input">
+              <option value="0.19">19% MwSt. (Germany)</option>
+              <option value="0">0% Reverse Charge / B2B EU</option>
+              <option value="0">0% Third Country</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Type -->
+      <div class="card">
+        <label class="card-title block" for="project-type">Project Type</label>
+        <select id="project-type" name="projectType" class="select-input">
+          <option value="Audit">Audit</option>
+          <option value="Tweaks">Tweaks</option>
+          <option value="NewBuild" selected>New Build</option>
+          <option value="Migration">Migration</option>
+          <option value="CustomApp">Custom App</option>
+        </select>
+      </div>
+
+      <!-- Design -->
+      <section class="card" aria-labelledby="section-design">
+        <h2 id="section-design" class="card-title">Design</h2>
+        <div class="field-row">
+          <label class="field-label" for="design-type">Design approach</label>
+          <select id="design-type" name="design" class="select-input w-52">
+            <option value="template">Template / Theme</option>
+            <option value="custom">Custom Design (+30%)</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Data -->
+      <section class="card" aria-labelledby="section-data">
+        <h2 id="section-data" class="card-title">Data</h2>
+        <div class="field-row">
+          <label class="field-label" for="data-csv">CSV Import</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="data-csv" data-module="Data" data-feature="CSV" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="data-csv-qty" data-for="data-csv" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 3 hrs</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="data-migration">Complex Migration</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="data-migration" data-module="Data" data-feature="ComplexMigration" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="data-migration-qty" data-for="data-migration" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 12 hrs</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="data-metafields">Metafields Setup</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="data-metafields" data-module="Data" data-feature="Metafields" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="data-metafields-qty" data-for="data-metafields" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 4 hrs</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dev -->
+      <section class="card" aria-labelledby="section-dev">
+        <h2 id="section-dev" class="card-title">Dev</h2>
+        <div class="field-row">
+          <label class="field-label" for="dev-simple">Simple Sections</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="dev-simple" data-module="Dev" data-feature="SimpleSection" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="dev-simple-qty" data-for="dev-simple" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 2 hrs ea.</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="dev-complex">Complex Sections</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="dev-complex" data-module="Dev" data-feature="ComplexSection" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="dev-complex-qty" data-for="dev-complex" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 6 hrs ea.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Apps -->
+      <section class="card" aria-labelledby="section-apps">
+        <h2 id="section-apps" class="card-title">Apps</h2>
+        <div class="field-row">
+          <label class="field-label" for="apps-standard">Standard App Integration</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="apps-standard" data-module="Apps" data-feature="Standard" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="apps-standard-qty" data-for="apps-standard" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 1 hr ea.</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="apps-complex">Complex App Integration</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="apps-complex" data-module="Apps" data-feature="Complex" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="apps-complex-qty" data-for="apps-complex" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 6 hrs ea.</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="apps-b2b">B2B Plus</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="apps-b2b" data-module="Apps" data-feature="B2B_Plus" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="apps-b2b-qty" data-for="apps-b2b" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 12 hrs ea.</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="apps-tracking-basic">Tracking – Basic</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="apps-tracking-basic" data-module="Apps" data-feature="TrackingBasic" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="apps-tracking-basic-qty" data-for="apps-tracking-basic" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 1 hr ea.</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="apps-tracking-advanced">Tracking – Advanced</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="apps-tracking-advanced" data-module="Apps" data-feature="TrackingAdvanced" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="apps-tracking-advanced-qty" data-for="apps-tracking-advanced" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 7 hrs ea.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Commerce -->
+      <section class="card" aria-labelledby="section-commerce">
+        <h2 id="section-commerce" class="card-title">Commerce</h2>
+        <div class="field-row">
+          <label class="field-label" for="commerce-markets">Shopify Markets</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="commerce-markets" data-module="Commerce" data-feature="Markets" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="commerce-markets-qty" data-for="commerce-markets" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 6 hrs</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <section class="card" aria-labelledby="section-content">
+        <h2 id="section-content" class="card-title">Content</h2>
+        <div class="field-row">
+          <label class="field-label" for="content-client">Client Provides Content</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="content-client" data-module="Content" data-feature="ClientProvides" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <input type="number" id="content-client-qty" data-for="content-client" min="1" value="1" class="qty-input feature-qty" disabled />
+            <span class="text-xs text-polaris-subdued w-12">× 4 hrs</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="content-full">Full Service Content</label>
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="content-full" data-module="Content" data-feature="FullServiceFlatFee" class="feature-check w-4 h-4 accent-polaris-interactive" />
+            <span class="text-xs text-polaris-subdued ml-auto">Flat €1,500</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Risk Buffer -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-3">
+          <label class="card-title mb-0" for="risk-buffer">Risk Buffer</label>
+          <span id="risk-buffer-value" class="text-sm font-semibold text-polaris-interactive">0%</span>
+        </div>
+        <input type="range" id="risk-buffer" name="riskBuffer" min="0" max="30" value="0" step="1"
+          class="w-full accent-polaris-interactive" />
+        <div class="flex justify-between text-xs text-polaris-subdued mt-1">
+          <span>0%</span><span>15%</span><span>30%</span>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- ── RIGHT: Sticky Sidebar ──────────────────────────────────── -->
+    <aside class="w-80 shrink-0 sticky top-24">
+      <div class="card">
+        <p class="card-title">Estimate Summary</p>
+
+        <!-- Hours -->
+        <div class="stat-block">
+          <p class="stat-label">Base Hours</p>
+          <p class="stat-value" id="out-base-hours">0 hrs</p>
+        </div>
+        <div class="stat-block">
+          <p class="stat-label">Feature Hours</p>
+          <p class="stat-value" id="out-feature-hours">0 hrs</p>
+        </div>
+        <div class="stat-block">
+          <p class="stat-label">Buffer Hours</p>
+          <p class="stat-value" id="out-buffer-hours">0 hrs</p>
+        </div>
+        <div class="stat-block">
+          <p class="stat-label">Total Hours</p>
+          <p class="stat-value" id="out-total-hours">0 hrs</p>
+        </div>
+
+        <hr class="border-polaris-border my-3" />
+
+        <!-- Financials -->
+        <div class="stat-block">
+          <p class="stat-label">Flat Fees</p>
+          <p class="stat-value" id="out-flat-fees">€0</p>
+        </div>
+        <div class="stat-block">
+          <p class="stat-label">Net Price (Netto)</p>
+          <p class="stat-value" id="out-net-price">€0</p>
+        </div>
+        <div class="stat-block">
+          <p class="stat-label" id="out-vat-label">Tax / VAT (0%)</p>
+          <p class="stat-value" id="out-tax-amount">€0</p>
+        </div>
+        <div class="stat-block">
+          <p class="stat-label">Gross Price (Brutto)</p>
+          <p class="stat-value" id="out-gross-price">€0</p>
+        </div>
+
+        <hr class="border-polaris-border my-3" />
+
+        <div class="stat-block mt-2">
+          <p class="stat-label">Final Price</p>
+          <p class="stat-value-lg" id="out-final-price">€0</p>
+          <p class="text-xs text-polaris-subdued mt-1">EUR · incl. applicable tax</p>
+        </div>
+      </div>
+
+      <p class="text-xs text-polaris-subdued text-center mt-2">
+        All estimates are indicative · Kevin Metzdorf Ltd.
+      </p>
+    </aside>
+
+  </main>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
