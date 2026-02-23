@@ -3,6 +3,7 @@ import { projectTypes, modules } from './config.js';
 export function calculateEstimate(state) {
   const baseHours = projectTypes[state.projectType]?.baseHours ?? 0;
 
+  let designedBaseHours = baseHours;
   let devHours = 0;
   let otherFeatureHours = 0;
   let flatFees = 0;
@@ -27,18 +28,19 @@ export function calculateEstimate(state) {
   }
 
   if (state.design === 'custom') {
-    devHours *= modules.Design.CustomDesignMultiplier;
+    designedBaseHours = baseHours * modules.Design.CustomDesignMultiplier;
+    devHours          = devHours  * modules.Design.CustomDesignMultiplier;
   }
 
   const featureHours = devHours + otherFeatureHours;
-  const bufferHours = (baseHours + featureHours) * ((state.riskBuffer ?? 0) / 100);
-  const totalHours = baseHours + featureHours + bufferHours;
+  const bufferHours  = (designedBaseHours + featureHours) * ((state.riskBuffer ?? 0) / 100);
+  const totalHours   = designedBaseHours + featureHours + bufferHours;
   const netPriceEUR   = totalHours * (state.hourlyRate ?? 75) + flatFees;
   const taxAmountEUR  = netPriceEUR * (state.taxRate ?? 0);
   const grossPriceEUR = netPriceEUR + taxAmountEUR;
 
   return {
-    baseHours,
+    baseHours: designedBaseHours,
     featureHours,
     bufferHours,
     totalHours,
