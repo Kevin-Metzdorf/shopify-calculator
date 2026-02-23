@@ -94,7 +94,73 @@ function run() {
   updateSidebar(result, state.taxRate);
 }
 
-// ── Risk buffer label ──────────────────────────────────────────────────────
+// ── PDF Generation ─────────────────────────────────────────────────────────
+document.getElementById('btn-download-pdf').addEventListener('click', () => {
+  const fmtEur = n => new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(n);
+
+  // Client / project meta
+  const clientName  = document.getElementById('client-name').value.trim()  || 'Client';
+  const projectName = document.getElementById('project-name').value.trim() || 'Project';
+
+  // Current date DD.MM.YYYY
+  const now = new Date();
+  const dateStr = [
+    String(now.getDate()).padStart(2, '0'),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    now.getFullYear(),
+  ].join('.');
+
+  // Inject meta
+  document.getElementById('pdf-date').textContent         = dateStr;
+  document.getElementById('pdf-client-name').textContent  = clientName;
+  document.getElementById('pdf-project-name').textContent = projectName;
+
+  // Inject pricing from current sidebar values
+  const state  = buildState();
+  const result = calculateEstimate(state);
+  const vatPct = Math.round(state.taxRate * 100);
+
+  document.getElementById('pdf-net').textContent       = fmtEur(result.netPriceEUR);
+  document.getElementById('pdf-vat-label').textContent = `VAT (${vatPct}%)`;
+  document.getElementById('pdf-vat').textContent       = fmtEur(result.taxAmountEUR);
+  document.getElementById('pdf-gross').textContent     = fmtEur(result.grossPriceEUR);
+
+  // Build features list
+  const list = document.getElementById('pdf-features-list');
+  list.innerHTML = '';
+
+  document.querySelectorAll('.feature-check').forEach(cb => {
+    if (!cb.checked) return;
+
+    const label  = document.querySelector(`label[for="${cb.id}"]`);
+    const qtyEl  = document.querySelector(`.feature-qty[data-for="${cb.id}"]`);
+    const name   = label ? label.textContent.trim() : cb.dataset.feature;
+    const qty    = qtyEl && !qtyEl.disabled ? Number(qtyEl.value) : 1;
+
+    const li = document.createElement('li');
+    li.className = 'text-sm text-polaris-text';
+    li.textContent = qty > 1 ? `${name} (× ${qty})` : name;
+    list.appendChild(li);
+  });
+
+  // Generate PDF
+  const template = document.getElementById('pdf-template');
+  template.classList.remove('hidden');
+
+  const opt = {
+    margin:     0,
+    filename:   `Estimate_${clientName.replace(/\s+/g, '_')}.pdf`,
+    image:      { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF:      { unit: 'mm', format: 'a4', orientation: 'portrait' },
+  };
+
+  html2pdf().set(opt).from(template).save().then(() => {
+    template.classList.add('hidden');
+  });
+});
+
+
 document.getElementById('risk-buffer').addEventListener('input', e => {
   document.getElementById('risk-buffer-value').textContent = `${e.target.value}%`;
 });
