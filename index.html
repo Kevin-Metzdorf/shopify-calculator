@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kevin Metzdorf Ltd. – Shopify Project Estimator</title>
   <link rel="stylesheet" href="./css/output.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body class="min-h-screen">
 
@@ -299,55 +300,6 @@
 
   </main>
 
-  <!-- ── PDF Template (off-screen, rendered by html2pdf) ─────────────── -->
-  <div style="position: absolute; left: -9999px; top: 0;">
-    <div id="pdf-template" class="bg-white box-border" style="width: 210mm; height: 297mm; padding: 20mm; position: relative; background-color: #ffffff;">
-      <header style="border-bottom: 2px solid #e1e3e5; padding-bottom: 24px; margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-end;">
-        <div>
-          <h1 class="text-3xl font-extrabold tracking-tight mb-1" style="color: #202223; margin: 0;">Project Estimate</h1>
-          <p class="text-sm font-semibold" style="color: #008060; margin: 0;">Kevin Metzdorf Ltd. – Shopify Agency</p>
-        </div>
-      </header>
-      <section style="display: flex; justify-content: space-between; background: #f6f6f7; border-radius: 10px; padding: 20px; margin-bottom: 36px;">
-        <div style="flex: 1;">
-          <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color: #6d7175; margin: 0 0 4px 0;">Date</p>
-          <p class="text-sm font-medium" style="color: #202223; margin: 0;"><span id="pdf-date"></span></p>
-        </div>
-        <div style="flex: 1;">
-          <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color: #6d7175; margin: 0 0 4px 0;">Client / Company</p>
-          <p class="text-sm font-medium" style="color: #202223; margin: 0;"><span id="pdf-client-name"></span></p>
-        </div>
-        <div style="flex: 1;">
-          <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color: #6d7175; margin: 0 0 4px 0;">Project Name</p>
-          <p class="text-sm font-medium" style="color: #202223; margin: 0;"><span id="pdf-project-name"></span></p>
-        </div>
-      </section>
-      <section style="margin-bottom: 36px;">
-        <h2 class="text-base font-bold uppercase tracking-wide mb-4" style="color: #202223; border-bottom: 1px solid #e1e3e5; padding-bottom: 8px;">Scope of Work</h2>
-        <ul id="pdf-features-list" class="list-none text-sm" style="color: #202223; padding: 0; margin: 0; line-height: 1.8;"></ul>
-      </section>
-      <section style="margin-bottom: 48px;">
-        <h2 class="text-base font-bold uppercase tracking-wide mb-4" style="color: #202223; border-bottom: 1px solid #e1e3e5; padding-bottom: 8px;">Pricing Summary</h2>
-        <div style="max-width: 260px; margin-left: auto;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
-            <span style="color: #6d7175;">Net Price (Netto)</span>
-            <span style="font-weight: 600; color: #202223;" id="pdf-net"></span>
-          </div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
-            <span style="color: #6d7175;" id="pdf-vat-label">VAT</span>
-            <span style="font-weight: 600; color: #202223;" id="pdf-vat"></span>
-          </div>
-          <div style="display: flex; justify-content: space-between; border-top: 2px solid #e1e3e5; padding-top: 10px; margin-top: 8px; font-size: 16px; font-weight: 800;">
-            <span style="color: #202223;">Gross Price (Brutto)</span>
-            <span style="color: #008060;" id="pdf-gross"></span>
-          </div>
-        </div>
-      </section>
-      <footer style="position: absolute; bottom: 20mm; left: 20mm; right: 20mm; border-top: 1px solid #e1e3e5; padding-top: 12px;">
-        <p style="font-size: 12px; text-align: center; color: #6d7175; margin: 0;">This non-binding estimate is valid for 14 days from the date of issue. Kevin Metzdorf Ltd. · Confidential</p>
-      </footer>
-    </div>
-  </div>
 
   <script type="module" src="./js/app.js"></script>
 </body>
